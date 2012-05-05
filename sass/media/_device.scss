@@ -1,0 +1,57 @@
+$debugGrid: true;
+
+// 30em * 16 = 480px
+@media only screen and (min-width: 480px){
+    
+}
+
+// 33em * 16 = 528px
+@media only screen and (min-width: 528px){
+    
+}
+
+// 40em * 16 = 640px
+@media only screen and (min-width: 640px){
+    .row{
+        @include gridBuild(16px, $cols, $space, $debugGrid);
+    }
+    nav{
+        ul{
+            float: right;
+            li{
+                display:inline;
+                a{
+                    width: 100px;
+                    float: left;
+                    margin-right: $space;
+                }
+                &:last-child{
+                    a{
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 48em * 16 = 768px
+@media only screen and (min-width: 768px){
+    .row{
+        @include gridBuild(22px, $cols, $space, $debugGrid);
+    }
+}
+
+// 56em * 16 = 896px
+@media only screen and (min-width: 896px){
+    .row{
+        @include gridBuild(27px, $cols, $space, $debugGrid);
+    }
+}
+
+// 60em * 16 = 960px
+@media only screen and (min-width: 960px){
+    .row{
+        @include gridBuild(30px, $cols, $space, $debugGrid);
+    }
+}

@@ -1,0 +1,91 @@
+@mixin fontface($embedFont : false){
+    @if $embedFont != false { 
+        @include font-face(
+        "#{$embedFont}",
+        font-files(
+        "#{$embedFont}-webfont.woff", woff,
+        "#{$embedFont}-webfont.ttf", truetype,
+        "#{$embedFont}-webfont.svg##{$embedFont}", svgm,
+        "#{$embedFont}-webfont.eot?#iefix", embedded-opentype
+        ),
+        "#{$embedFont}-webfont.eot"
+        );
+    }
+}
+
+@mixin fontfamily($embedFont : false){
+    @if $embedFont == false { font-family: Tahoma, Helvetica, Arial, sans-serif; }
+    @else { font-family: "#{$embedFont}", Tahoma, Helvetica, Arial, sans-serif; }
+}
+
+@mixin lnkcolorize($fc : #000, $lc : #000){
+    @include hover-link;
+    @include link_colors($fc,$lc,$fc,$fc,$fc);
+    &.selected{
+        @include link_colors($lc,$lc,$lc,$lc,$lc);
+    }
+}
+
+// Default 380px - $space
+@mixin gridSimple($w: 380px, $s: 10px, $h: false){
+    
+    // Helpers
+    $showHelperGrid: $h;
+    $colorGrid: rgba(0,0,255,.3);
+    $colorContainer: rgba(255,0,0,.3);
+    
+    @if $showHelperGrid == true {
+        background-color: $colorContainer;
+    }
+    width: $w - ($s * 2);
+    margin: 0 auto;
+    display: block;
+    overflow:visible;
+    position: relative;
+    .grid{
+        @if $showHelperGrid == true {
+            background-color: $colorContainer;
+        }
+    }
+}
+
+// Default 960px - $space
+@mixin gridBuild($w: 30px, $c: 24, $m: 10px, $h: false){
+    // Grid
+    $blueprint_grid_width: $w;
+    $blueprint_grid_columns: $c;
+    $blueprint-grid-margin: $m;
+
+    // Grid - Constantes
+    $blueprint-grid-outer-width: $blueprint-grid-width + $blueprint-grid-margin;
+    $blueprint-container-size: $blueprint-grid-outer-width * $blueprint-grid-columns - $blueprint-grid-margin;
+
+    // Helpers
+    $showHelperGrid: $h;
+    $colorGrid: rgba(0,0,255,.3);
+    $colorContainer: rgba(255,0,0,.3);
+
+    @include container;
+    overflow:visible;
+    position: relative;
+    @if $showHelperGrid == true {
+        background-color: $colorContainer;
+    }
+    
+    // Loop grid
+    $i: $blueprint_grid_columns;
+    @while $i > 0 {
+        .grid{
+            &.grid_#{$i} {
+                @if $showHelperGrid == true {
+                    background-color: $colorGrid;
+                }
+                @include column($i);
+                &:last-child{
+                    @include column($i,true);
+                }
+            }
+        }
+        $i: $i - 1;
+    }
+}

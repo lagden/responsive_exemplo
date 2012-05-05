@@ -1,0 +1,43 @@
+// Mobile
+.wrapper{
+    background-color: rgba(0,0,0,.3);
+}
+
+.row{
+    width: 95%;
+    margin: 0 auto;
+    background-color: rgba(0,255,0,.3);
+}
+
+body{
+    background-color: $bgColor;
+    color: $fontColor;
+}
+nav{
+    ul{
+        margin:0;
+        padding:0;
+        li{
+            display: block;
+            a{
+                width: 95%;
+                display: block;
+                margin:0 auto;
+                margin-bottom: $space;
+                padding:$space 0;
+                background-color: blue;
+                color:white;
+                text-align: center;
+                text-decoration: none;
+                font-weight: bold;
+                &:hover,
+                &:visited{
+                    color:white;
+                }
+                &:hover{
+                    text-decoration:underline;
+                }
+            }
+        }
+    }
+}
